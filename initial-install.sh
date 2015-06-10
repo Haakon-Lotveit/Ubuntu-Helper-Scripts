@@ -7,14 +7,6 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
-###############################################################################
-### Before we begin installing stuff, set up some basic stuff, like         ###
-### disabling the shopping suggestions from the lens. I'm not a fan. ;)     ###
-###############################################################################
-
-# Disable the shopping suggestions, etc.
-source ./fixubuntu.sh
-
 # Disable apport, so I don't get bothered with 400 "Crash reports"
 # where nothing has crashed. This is supposed to be disabled when it has
 # shipped, but it doesn't always. So I'll do it manually.
@@ -31,8 +23,6 @@ service apport stop
 ###############################################################################
 
 echo 'Adding PPA repositories'
-# New emacs and stuff
-add-apt-repository ppa:cassou/emacs             --yes
 # Oracle Java
 add-apt-repository ppa:webupd8team/java         --yes
 # FFMPEG support
@@ -102,9 +92,7 @@ git-all                     \
 build-essential             \
 maven maven2                \
 ant ant-doc                 \
-emacs-snapshot-el           \
-emacs-snapshot-gtk          \
-emacs-snapshot              \
+emacs                       \
 gimp gimp-data              \
 gimp-plugin-registry        \
 gimp-data-extras            \
