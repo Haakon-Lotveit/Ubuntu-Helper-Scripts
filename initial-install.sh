@@ -10,8 +10,8 @@ fi
 # Disable apport, so I don't get bothered with 400 "Crash reports"
 # where nothing has crashed. This is supposed to be disabled when it has
 # shipped, but it doesn't always. So I'll do it manually.
-cat /etc/default/apport | sed s/enabled=1/enabled=0/g > /etc/default/apport 
-service apport stop
+#cat /etc/default/apport | sed s/enabled=1/enabled=0/g > /etc/default/apport 
+#service apport stop
 
 ###############################################################################
 ### Some of the programs we want are not in the normal repositories.        ###
@@ -23,12 +23,6 @@ service apport stop
 ###############################################################################
 
 echo 'Adding PPA repositories'
-# Oracle Java
-add-apt-repository ppa:webupd8team/java         --yes
-# FFMPEG support
-add-apt-repository ppa:mc3man/trusty-media      --yes
-# Global menu bar in Java GUIs.
-add-apt-repository ppa:danjaredg/jayatana       --yes
 # The GIMP (Green Is My Pepper) image editor
 add-apt-repository ppa:otto-kesselgulasch/gimp  --yes
 
@@ -41,9 +35,6 @@ apt-get upgrade --assume-yes
 # We have to agree to licensing terms from Microsoft and Oracle.
 # Babysitting this stuff defeats the purpose of automated installs.
 # We want "Push play, walk away", not "Push play, then stay and watch".
-echo 'Accepting EULAs without reading them'
-echo 'oracle-java8-installer shared/accepted-oracle-license-v1-1 select true' \
-    | /usr/bin/debconf-set-selections
 echo 'ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true' \
     | /usr/bin/debconf-set-selections
 
@@ -57,19 +48,13 @@ echo 'ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select t
 
 echo 'Installing software'
 apt-get install \
+wine winetricks             \
 ubuntu-restricted-extras    \
 gnome-tweak-tool            \
 unity-tweak-tool            \
 libreoffice-style-sifr      \
 ubuntu-wallpapers*          \
 libappindicator1            \
-gtk2-engines-murrine:i386   \
-gtk2-engines-pixbuf:i386    \
-sni-qt:i386                 \
-synaptic                    \
-tasksel                     \
-rar                         \
-p7zip                       \
 libavcodec-extra            \
 gstreamer0.10-plugins-good  \
 gstreamer0.10-plugins-bad   \
@@ -81,14 +66,10 @@ swi-prolog                  \
 ghc ghc-doc                 \
 sbcl sbcl-doc               \
 r-base r-recommended        \
-openjdk-7-jdk               \
-openjdk-7-doc               \
-icedtea-7-plugin            \
-oracle-java7-installer      \
-oracle-java8-installer      \
-oracle-java8-set-default    \
+openjdk-8-jdk               \
+openjdk-8-doc               \
 virtualbox                  \
-git-all                     \
+git                         \
 build-essential             \
 maven maven2                \
 ant ant-doc                 \
