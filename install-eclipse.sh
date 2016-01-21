@@ -37,7 +37,7 @@ cp $TARBALL_FULL $INSTALL_FOLDER
 # Step 3: Go to the install folder
 pushd $INSTALL_FOLDER > /dev/null
 # Step 4: Extract the stuff
-tar zxf $TAR_FILE > /dev/null
+tar xf $TAR_FILE > /dev/null
 # Step 5: Then remove the old tarball
 rm $TAR_FILE
 

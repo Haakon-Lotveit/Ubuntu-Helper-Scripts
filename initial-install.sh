@@ -7,16 +7,10 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
-# Disable apport, so I don't get bothered with 400 "Crash reports"
-# where nothing has crashed. This is supposed to be disabled when it has
-# shipped, but it doesn't always. So I'll do it manually.
-#cat /etc/default/apport | sed s/enabled=1/enabled=0/g > /etc/default/apport 
-#service apport stop
 
 ###############################################################################
 ### Some of the programs we want are not in the normal repositories.        ###
 ### So we add more repos with PPAs. Which are a brilliant idea.             ###
-### Thanks Canonical!                                                       ###
 ### After that, we update our package listings, install any upgrades,       ###
 ### agree to the EULAs of some companies (Oracle and MS), and then we're    ###
 ### _finally_ ready to go.                                                  ###
@@ -48,6 +42,7 @@ echo 'ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select t
 
 echo 'Installing software'
 apt-get install \
+emacs                       \
 wine winetricks             \
 ubuntu-restricted-extras    \
 gnome-tweak-tool            \
@@ -68,7 +63,6 @@ sbcl sbcl-doc               \
 r-base r-recommended        \
 openjdk-8-jdk               \
 openjdk-8-doc               \
-virtualbox                  \
 git                         \
 build-essential             \
 maven maven2                \
